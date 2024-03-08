@@ -20,6 +20,7 @@ void bubblesort(int vetor[], int n) ;
 void bubbleMelhorado ( int *item ,int count );
 void bubblesort_plus (int vetor[], int n);
 void inserctionSort(int *item ,int count);
+void selectionSort(int * item, int contador);
 
 int main()
 {
@@ -34,6 +35,7 @@ int main()
 	int *vetor1 = (int *)malloc(TAM * sizeof(int));
 	int *vetor2 = (int *)malloc(TAM * sizeof(int));
 	int *vetor3 = (int *)malloc(TAM * sizeof(int));
+	int *vetor4 = (int *)malloc(TAM * sizeof(int));
 
 	if (vetor == NULL)
 	{
@@ -50,6 +52,7 @@ int main()
 			*(vetor1 + i) = v;
 			*(vetor2 + i) = v;
 			*(vetor3 + i) = v;
+			*(vetor4 + i) = v;
 		}
 		else
 		{
@@ -84,11 +87,19 @@ int main()
 	}
 
     printf("\n");
-    printf("\nInserction padrao: ");
+    printf("\nInsertion padrao: ");
     
 	for (j = TAM - 10; j < TAM ; j++)
 	{
 		printf("%d ", *(vetor3 + j));
+	}
+
+	printf("\n");
+    printf("\nSelection padrao: ");
+    
+	for (j = TAM - 10; j < TAM ; j++)
+	{
+		printf("%d ", *(vetor4 + j));
 	}
 
     printf("\n\n\n");
@@ -135,11 +146,24 @@ int main()
 
 	gettimeofday(&start, NULL);
 
-	inserctionSort(vetor3, TAM);
+	insertionSort(vetor3, TAM);
 
 	gettimeofday(&stop, NULL);
 
-	printf("\nFinaliza  a funcao inserction...");
+	printf("\nFinaliza  a funcao insertion...");
+	//tempo_decorrido = ((double) (fim - inicio)) / CLOCKS_PER_SEC;
+
+    //printf("Tempo decorrido: %f segundos\n", tempo_decorrido);
+	secs = (double)(stop.tv_usec - start.tv_usec) / 1000000 + (double)(stop.tv_sec - start.tv_sec);
+	printf("\nTempo decorrido %f em segundo(s)\n", secs);
+
+	gettimeofday(&start, NULL);
+
+	selectionSort(vetor4, TAM);
+
+	gettimeofday(&stop, NULL);
+
+	printf("\nFinaliza  a funcao selection...");
 	//tempo_decorrido = ((double) (fim - inicio)) / CLOCKS_PER_SEC;
 
     //printf("Tempo decorrido: %f segundos\n", tempo_decorrido);
@@ -172,11 +196,19 @@ int main()
 	}
 
     printf("\n");
-    printf("\nOrdenacao inserction padrao: ");
+    printf("\nOrdenacao insertion padrao: ");
     
 	for (j = TAM - 10; j < TAM ; j++)
 	{
 		printf("%d ", *(vetor3 + j));
+	}
+
+	printf("\n");
+    printf("\nSelection padrao: ");
+    
+	for (j = TAM - 10; j < TAM ; j++)
+	{
+		printf("%d ", *(vetor4 + j));
 	}
 
     printf("\n\n\n");
@@ -227,7 +259,7 @@ for(i=0;i<count -1;i ++){
 }
 }
 
-void inserctionSort(int *item ,int count) 
+void insertionSort(int *item ,int count) 
 {
 
 	int i, j, eleito;
@@ -244,5 +276,32 @@ void inserctionSort(int *item ,int count)
         }
 
         item[j+1] = eleito;
+    }
+}
+
+void selectionSort(int * item, int contador)
+{
+    int eleito, menor, pos;
+
+    for (int i = 0; i < contador - 1; i++)
+    {
+        eleito = item[i];
+        menor = item[i+1];
+        pos = i + 1;
+
+        for(int j = i+1; j < contador; j++)
+        {
+            if(item[j] < menor)
+            {
+                menor = item[j];
+                pos = j;
+            }
+        }
+
+        if(menor < eleito)
+        {
+            item[i] = item[pos];
+            item[pos] = eleito;
+        }
     }
 }
