@@ -1,46 +1,54 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Implementação da função strcpy
-void strcpy_custom(char *destino, char *origem) {
-    while (*origem) {
+// 3. Implemente a função strcpy (char *destino, char *origem) e a função strcat (char *destino, char *origem) usando ponteiros.
+
+void strcpy_custom(char *destino, char *origem) 
+{
+    while (*origem) 
+    {
         *destino = *origem;
         origem++;
         destino++;
     }
-    *destino = '\0'; // Adiciona o caractere nulo de terminação no final da string de destino
+    *destino = '\0'; 
 }
 
-// Implementação da função strcat
-void strcat_custom(char *destino, char *origem) {
-    // Percorre até o final da string de destino
-    while (*destino) {
+
+void strcat_custom(char *destino, char *origem) 
+{
+    
+    while (*destino) 
+    {
         destino++;
     }
 
-    // Copia a string de origem para o final da string de destino
-    while (*origem) {
+    while (*origem) 
+    {
         *destino = *origem;
         origem++;
         destino++;
     }
-    *destino = '\0'; // Adiciona o caractere nulo de terminação no final da string de destino
+    *destino = '\0';
 }
 
-int main() {
-    char destino[50] = "Hello, ";
-    char origem1[] = "world!";
-    char origem2[] = " Welcome to the C programming world!";
+int main() 
+{
+    char destino[50] = "Nadaver ";
+    char origem1[] = "Boa tarde pessoal!";
+    char origem2[] = "Vamos manipular strings com ponteiros!";
+    char espaco[] = " ";
 
-    // Teste da função strcpy_custom
-    printf("Copiando a string 'world!' para 'destino':\n");
+    printf("Destino antes copia: %s\n", destino);
+    printf("Copiando a string 'Boa tarde pessoal!' para 'destino':\n");
     strcpy_custom(destino, origem1);
-    printf("Resultado: %s\n\n", destino);
+    printf("Resultado: %s\n\n\n", destino);
 
-    // Teste da função strcat_custom
-    printf("Anexando a string ' Welcome to the C programming world!' em 'destino':\n");
+    printf("Destino da concatenacao copia: %s\n", destino);
+    printf("Anexando a string 'Vamos manipular strings com ponteiros!' em 'destino':\n");
+    strcat_custom(destino, espaco);
     strcat_custom(destino, origem2);
-    printf("Resultado: %s\n", destino);
+    printf("Resultado: %s\n\n\n", destino);
 
     return 0;
 }
